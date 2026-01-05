@@ -17,8 +17,8 @@ export default function RootLayout() {
     const pathName = usePathname();
     const isLightScreen = pathName.includes("/auth");
     const [fontsLoaded, fontError] = useFonts({
-        "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
-        "Poppins-RegularItalic": require("../assets/fonts/Poppins-Italic.ttf"),
+        Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
+        "Poppins-Italic": require("../assets/fonts/Poppins-Italic.ttf"),
         "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
         "Poppins-SemiBoldItalic": require("../assets/fonts/Poppins-SemiBoldItalic.ttf"),
         "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),

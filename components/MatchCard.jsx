@@ -119,7 +119,7 @@ export function MatchCard({ match }) {
                 <View className="flex-row items-center justify-between">
                     <View className="flex-row items-center space-x-2">
                         <LocationIcon color="gray" />
-                        <Text className="text-textPrimary text-base font-poppins-semibold">
+                        <Text className="text-textPrimary text-base font-poppins-semibold px-3">
                             {match?.location || "No location"}
                         </Text>
                     </View>

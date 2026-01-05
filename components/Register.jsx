@@ -99,7 +99,7 @@ export function Register() {
                 name="password"
                 placeholder="Password"
                 control={control}
-                icon={<PasswordIcon size={30} />}
+                icon={<PasswordIcon size={27} />}
                 error={errors.password ? true : false}
                 disabled={isLoading}
                 comment={errors.password?.message}
@@ -108,7 +108,7 @@ export function Register() {
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 control={control}
-                icon={<PasswordIcon size={30} />}
+                icon={<PasswordIcon size={27} />}
                 error={errors.confirmPassword ? true : false}
                 disabled={isLoading}
                 comment={errors.confirmPassword?.message}

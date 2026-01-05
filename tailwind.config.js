@@ -17,10 +17,10 @@ module.exports = {
                 border: "#E5E7EB", // Bordes sutiles
             },
             fontFamily: {
-                poppins: ["Poppins-Regular"],
+                poppins: ["Poppins"],
                 "poppins-semibold": ["Poppins-SemiBold"],
                 "poppins-bold": ["Poppins-Bold"],
-                "poppins-italic": ["Poppins-RegularItalic"],
+                "poppins-italic": ["Poppins-Italic"],
             },
         },
     },
