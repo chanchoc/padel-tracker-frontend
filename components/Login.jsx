@@ -79,7 +79,7 @@ export function Login() {
                 name="password"
                 placeholder="Password"
                 control={control}
-                icon={<PasswordIcon size={27} />}
+                icon={<PasswordIcon size={30} />}
                 error={errors.password ? true : false}
                 disabled={isLoading}
                 comment={errors.password?.message}

@@ -1,77 +1,177 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { View } from "react-native";
+
+const IconWrapper = ({ children, size = 24 }) => {
+    return <View style={{ width: size, alignItems: "center", justifyContent: "center" }}>{children}</View>;
+};
 
 export const PasswordIcon = (props) => {
-    return <FontAwesome name="key" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="lock" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const EmailIcon = (props) => {
-    return <FontAwesome name="at" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="at" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const UserIcon = (props) => {
-    return <FontAwesome name="user" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="user" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const BackArrowIcon = (props) => {
-    return <FontAwesome name="arrow-left" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="arrow-left" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const SaveIcon = (props) => {
-    return <FontAwesome name="save" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="save" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const EditIcon = (props) => {
-    return <FontAwesome name="pencil" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="pencil" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const DropdownIcon = (props) => {
-    return <FontAwesome name="chevron-down" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="chevron-down" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const CalendarIcon = (props) => {
-    return <FontAwesome name="calendar" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="calendar" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export function TennisIcon(props) {
-    return <FontAwesome name="list-ul" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="list-ul" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 }
 
 export const StatsIcon = (props) => {
-    return <FontAwesome name="signal" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="signal" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const LocationIcon = (props) => {
-    return <FontAwesome name="location-arrow" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="location-arrow" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const TeammateIcon = (props) => {
-    return <FontAwesome name="user-plus" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size + 3}>
+            <FontAwesome name="user-plus" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const OpponentIcon = (props) => {
-    return <FontAwesome name="user-times" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size + 3}>
+            <FontAwesome name="user-times" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const LevelIcon = (props) => {
-    return <FontAwesome name="list-ol" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="list-ol" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const SideIcon = (props) => {
-    return <FontAwesome name="expand" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="expand" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const ResultIcon = (props) => {
-    return <FontAwesome name="flag" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="flag" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const CommentIcon = (props) => {
-    return <FontAwesome name="comment" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="comment" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const ScoreIcon = (props) => {
-    return <FontAwesome name="star" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="star" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
 
 export const FiltersIcon = (props) => {
-    return <FontAwesome name="filter" size={24} color="black" {...props} />;
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="filter" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
 };
