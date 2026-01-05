@@ -6,36 +6,57 @@ import { MatchesProvider } from "../contexts/MatchesContext.js";
 import { PlayersProvider } from "../contexts/PlayersContext.js";
 import { useFonts } from "expo-font";
 import { AuthLoading } from "../components/AuthLoading.jsx";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback, useEffect } from "react";
+import { View } from "react-native";
+
+// Keep splash visible while fonts load
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
     const pathName = usePathname();
     const isLightScreen = pathName.includes("/auth");
-    const [fontsLoaded] = useFonts({
+    const [fontsLoaded, fontError] = useFonts({
         "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
         "Poppins-RegularItalic": require("../assets/fonts/Poppins-Italic.ttf"),
         "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
         "Poppins-SemiBoldItalic": require("../assets/fonts/Poppins-SemiBoldItalic.ttf"),
         "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
         "Poppins-BoldItalic": require("../assets/fonts/Poppins-BoldItalic.ttf"),
+        FontAwesome: require("../assets/fonts/FontAwesome.ttf"),
     });
 
-    if (!fontsLoaded) {
-        return <AuthLoading />;
-    }
+    useEffect(() => {
+        if (fontError) {
+            SplashScreen.hideAsync().catch(() => {});
+        }
+    }, [fontError]);
+
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+            await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
 
     return (
-        <AuthProvider>
-            <MatchesProvider>
-                <PlayersProvider>
-                    <StatusBar style={isLightScreen ? "dark" : "light"} />
-                    <Stack
-                        screenOptions={{
-                            headerShown: false,
-                        }}
-                    />
-                    <Toast />
-                </PlayersProvider>
-            </MatchesProvider>
-        </AuthProvider>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+            {!fontsLoaded && !fontError ? (
+                <AuthLoading />
+            ) : (
+                <AuthProvider>
+                    <MatchesProvider>
+                        <PlayersProvider>
+                            <StatusBar style={isLightScreen ? "dark" : "light"} />
+                            <Stack
+                                screenOptions={{
+                                    headerShown: false,
+                                }}
+                            />
+                            <Toast />
+                        </PlayersProvider>
+                    </MatchesProvider>
+                </AuthProvider>
+            )}
+        </View>
     );
 }
