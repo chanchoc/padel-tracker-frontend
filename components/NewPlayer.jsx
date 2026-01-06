@@ -2,7 +2,7 @@ import { styled } from "nativewind";
 import { useState } from "react";
 import { Modal, Pressable, Text, View } from "react-native";
 import { FormInput } from "./FormInput.jsx";
-import { UserIcon } from "./Icons.jsx";
+import { PlusIcon, UserIcon } from "./Icons.jsx";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ const playerSchema = yup.object({
     name: yup.string().required("Name is required").max(100, "Name must be at most 100 characters"),
 });
 
-export function NewPlayer({ players, onCreated, refresh = false, fastCreate = false }) {
+export function NewPlayer({ players, onCreated, refresh = false, fastCreate = false, updating = false }) {
     const [isLoading, setIsLoading] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const { refreshPlayers } = usePlayers();
@@ -93,19 +93,21 @@ export function NewPlayer({ players, onCreated, refresh = false, fastCreate = fa
         <>
             {fastCreate ? (
                 <StyledPressable
-                    className="rounded-lg bg-primary/10 px-3 py-1 active:bg-gray-300 border border-primary"
+                    className={`rounded-lg bg-primary/10 px-3 py-1 active:bg-gray-300 border border-primary ${
+                        updating ? "opacity-50" : ""
+                    }`}
                     onPress={handleNewPlayerPress}
-                    disabled={isLoading}
+                    disabled={isLoading || updating}
                 >
                     <Text className="text-primary text-sm font-poppins-semibold">+ New player</Text>
                 </StyledPressable>
             ) : (
                 <StyledPressable
                     className="bg-surface mx-4 rounded-full h-10 w-10 items-center justify-center active:bg-gray-300"
-                    onPress={handleNewPlayerPress}
+                    onPress={handleNewPlayerPress || updating}
                     disabled={isLoading}
                 >
-                    <Text className="text-blue-800 text-2xl font-poppins-bold">+</Text>
+                    <PlusIcon color="#1E40AF" />
                 </StyledPressable>
             )}
             <Modal visible={showConfirm} transparent={true} animationType="fade">

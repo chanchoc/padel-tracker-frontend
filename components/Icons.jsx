@@ -61,11 +61,7 @@ export const EditIcon = (props) => {
 
 export const DropdownIcon = (props) => {
     const { size = 24, ...rest } = props;
-    return (
-        <IconWrapper size={size}>
-            <FontAwesome name="chevron-down" size={size} color="black" {...rest} />
-        </IconWrapper>
-    );
+    return <FontAwesome name="chevron-down" size={size} color="black" {...rest} />;
 };
 
 export const CalendarIcon = (props) => {
@@ -172,6 +168,15 @@ export const FiltersIcon = (props) => {
     return (
         <IconWrapper size={size}>
             <FontAwesome name="filter" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
+};
+
+export const PlusIcon = (props) => {
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="plus" size={size} color="black" {...rest} />
         </IconWrapper>
     );
 };

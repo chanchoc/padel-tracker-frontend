@@ -1,13 +1,17 @@
-import { ScrollView, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import { StatsSummary } from "./StatsSummary.jsx";
 import { HeadToHead } from "./HeadToHead.jsx";
 import { Timeline } from "./Timeline.jsx";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useLayoutEffect } from "react";
 import { getSummaryStats, getHeadToHeadStats, getTimeline } from "../services/stats.js";
 import { useMatches } from "../hooks/useMatches.js";
 import { ErrorMessage } from "./ErrorMessage.jsx";
 import { useFocusEffect } from "@react-navigation/native";
 import { StatsSkeleton } from "./StatsSkeleton.jsx";
+import { useNavigation } from "expo-router";
+import { FiltersIcon } from "./Icons.jsx";
+import { StatsFilters } from "./StatsFilters.jsx";
+import { useForm } from "react-hook-form";
 
 export function Stats() {
     const [stats, setStats] = useState(null);
@@ -15,13 +19,23 @@ export function Stats() {
     const [timeline, setTimeline] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showFilters, setShowFilters] = useState(false);
+    const filtersForm = useForm({
+        defaultValues: {
+            startDate: null,
+            endDate: null,
+            opponents: [],
+            teammates: [],
+            level: null,
+            side: null,
+        },
+    });
+    const navigation = useNavigation();
     const { refreshTrigger } = useMatches();
     const lastRefreshTrigger = useRef(0);
 
     const loadStats = useCallback(() => {
-        if (lastRefreshTrigger.current === refreshTrigger) {
-            return;
-        }
+        if (lastRefreshTrigger.current === refreshTrigger) return;
         setLoading(true);
         setError(null);
         lastRefreshTrigger.current = refreshTrigger;
@@ -38,6 +52,32 @@ export function Stats() {
                 setLoading(false);
             });
     }, [refreshTrigger]);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <View className="flex-row mr-4">
+                    <Pressable
+                        disabled={loading}
+                        onPress={() => setShowFilters(true)}
+                        style={{
+                            opacity: loading ? 0.5 : 1,
+                            backgroundColor: "#FFFFFF",
+                            borderRadius: 20,
+                            width: 40,
+                            height: 40,
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                        accessibilityLabel="Add filters"
+                        accessibilityHint="Opens form to select filters"
+                    >
+                        <FiltersIcon size={24} color="#0F172A" />
+                    </Pressable>
+                </View>
+            ),
+        });
+    }, [navigation, loading]);
 
     useFocusEffect(loadStats);
 
@@ -56,15 +96,24 @@ export function Stats() {
     }
 
     return (
-        <ScrollView className="flex-1 bg-background" contentContainerStyle={{ flexGrow: 1 }}>
-            <View className="flex-1 items-center justify-start p-6">
-                {/* Stats Summary Component */}
-                <StatsSummary stats={stats} />
-                {/* Timeline Component */}
-                <Timeline data={timeline} maxWeeks={5} />
-                {/* Head to head Component */}
-                <HeadToHead data={headToHead} />
-            </View>
-        </ScrollView>
+        <>
+            <ScrollView className="flex-1 bg-background" contentContainerStyle={{ flexGrow: 1 }}>
+                <View className="flex-1 items-center justify-start p-6">
+                    {/* Stats Summary Component */}
+                    <StatsSummary stats={stats} />
+                    {/* Timeline Component */}
+                    <Timeline data={timeline} maxWeeks={5} />
+                    {/* Head to head Component */}
+                    <HeadToHead data={headToHead} />
+                </View>
+            </ScrollView>
+            <StatsFilters
+                visible={showFilters}
+                onClose={() => setShowFilters(false)}
+                control={filtersForm.control}
+                onApply={filtersForm.handleSubmit(() => console.log("Apply filters"))}
+                onClear={() => filtersForm.reset()}
+            />
+        </>
     );
 }

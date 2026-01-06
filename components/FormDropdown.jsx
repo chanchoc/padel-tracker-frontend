@@ -10,7 +10,9 @@ export function FormDropdown({
     control,
     name,
     label,
+    labelClass,
     placeholder,
+    textClass,
     options = [],
     displayKey = "name",
     valueKey = "_id",
@@ -56,7 +58,9 @@ export function FormDropdown({
         <View className="mb-4 justify-center">
             {/* Label */}
             <View className="flex-row items-center mb-1">
-                <Text className="text-textPrimary font-poppins-semibold text-base">{label}</Text>
+                <Text className={`${labelClass ? labelClass : "text-textPrimary font-poppins-semibold text-base"}`}>
+                    {label}
+                </Text>
                 {required && <Text className="text-red-600 ml-1 font-poppins">*</Text>}
             </View>
             {/* Dropdown Button */}
@@ -91,7 +95,7 @@ export function FormDropdown({
                         </View>
                     ) : (
                         <Text
-                            className={`text-base font-poppins ${
+                            className={`${textClass ? textClass : "text-base"} font-poppins ${
                                 selectedItems.length > 0 ? "text-textPrimary" : "text-gray-400"
                             }`}
                         >

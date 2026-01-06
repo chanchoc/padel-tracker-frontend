@@ -11,7 +11,9 @@ export function FormDate({
     control,
     name,
     label,
+    labelClass,
     placeholder,
+    textClass,
     required = false,
     maxDate = new Date(),
     updating = false,
@@ -58,7 +60,9 @@ export function FormDate({
         <View className="mb-4">
             {/* Label */}
             <View className="flex-row items-center mb-1">
-                <Text className="text-text-primary font-poppins-semibold text-base">{label}</Text>
+                <Text className={`${labelClass ? labelClass : "text-text-primary font-poppins-semibold text-base"}`}>
+                    {label}
+                </Text>
                 {required && <Text className="text-red-600 ml-1 font-poppins">*</Text>}
             </View>
             {/* Date Button */}
@@ -74,7 +78,11 @@ export function FormDate({
             >
                 <CalendarIcon color={error ? "#EF4444" : isFocused ? "#1E40AF" : "#6B7280"} />
                 <View className="w-px h-full bg-gray-400" />
-                <Text className={`text-base font-poppins ${selectedDate ? "text-textPrimary" : "text-gray-400"}`}>
+                <Text
+                    className={`text-base font-poppins ${selectedDate ? "text-textPrimary" : "text-gray-400"} ${
+                        textClass ? textClass : ""
+                    }`}
+                >
                     {selectedDate ? formatDate(selectedDate) : placeholder}
                 </Text>
             </StyledPressable>

@@ -298,7 +298,12 @@ export function CreateMatch() {
                 {/* Players */}
                 <View className="flex-1 flex-row items-center justify-between mb-2 mt-4">
                     <Text className="text-textSecondary text-sm font-poppins">Players:</Text>
-                    <NewPlayer players={players} onCreated={handlePlayerCreated} fastCreate={true} />
+                    <NewPlayer
+                        players={players}
+                        onCreated={handlePlayerCreated}
+                        fastCreate={true}
+                        updating={updating}
+                    />
                 </View>
                 <FormDropdown
                     control={control}

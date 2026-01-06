@@ -68,6 +68,7 @@ export function AllMatches() {
                     renderItem={({ item, index }) => <AnimatedMatchCardMemo match={item} index={index} />}
                     className="flex-1"
                     contentContainerStyle={{ paddingTop: 12, paddingBottom: 12, gap: 12 }}
+                    showsVerticalScrollIndicator={false}
                 />
             )}
         </View>

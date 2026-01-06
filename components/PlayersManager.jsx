@@ -1,7 +1,7 @@
 import { styled } from "nativewind";
 import { FlatList, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { BackArrowIcon } from "./Icons";
+import { BackArrowIcon, PlusIcon } from "./Icons";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { getPlayers } from "../services/players.js";
@@ -63,7 +63,7 @@ export function PlayersManager() {
                         accessibilityHint="Saves the new match and returns to the expenses list"
                         disabled={true}
                     >
-                        <Text className="text-blue-800 text-2xl font-poppins-bold">+</Text>
+                        <PlusIcon color="#1E40AF" />
                     </StyledPressable>
                 </View>
                 {/* Loading skeleton */}
@@ -99,7 +99,7 @@ export function PlayersManager() {
                         accessibilityHint="Saves the new match and returns to the expenses list"
                         disabled={true}
                     >
-                        <Text className="text-blue-800 text-2xl font-poppins-bold">+</Text>
+                        <PlusIcon color="#1E40AF" />
                     </StyledPressable>
                 </View>
                 {/* Error Message */}

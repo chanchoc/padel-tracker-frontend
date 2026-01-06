@@ -1,7 +1,7 @@
 import { Redirect, router, Tabs } from "expo-router";
 import { styled } from "nativewind";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
-import { FiltersIcon, StatsIcon, TennisIcon, UserIcon } from "../../components/Icons.jsx";
+import { PlusIcon, StatsIcon, TennisIcon, UserIcon } from "../../components/Icons.jsx";
 import { useAuth } from "../../hooks/useAuth.js";
 import { AuthLoading } from "../../components/AuthLoading.jsx";
 
@@ -80,7 +80,7 @@ export default function TabsLayout() {
                                     accessibilityLabel="Add new match"
                                     accessibilityHint="Opens form to create a new match"
                                 >
-                                    <Text className="text-white text-2xl font-bold font-poppins">+</Text>
+                                    <PlusIcon size={24} color="#FFFFFF" />
                                 </StyledPressable>
                                 <StyledPressable
                                     className="bg-surface rounded-full h-10 w-10 items-center justify-center active:bg-gray-300"
@@ -100,18 +100,6 @@ export default function TabsLayout() {
                     options={{
                         headerTitle: "My Stats",
                         tabBarIcon: ({ color }) => <StatsIcon size={24} color={color} />,
-                        headerRight: () => (
-                            <View className="flex-row space-x-6 mr-4">
-                                <StyledPressable
-                                    className="bg-surface rounded-full h-10 w-10 items-center justify-center active:bg-gray-300"
-                                    onPress={() => console.log("Filters pressed")}
-                                    accessibilityLabel="Add filters"
-                                    accessibilityHint="Opens form to select filters"
-                                >
-                                    <FiltersIcon size={24} color="#0F172A" />
-                                </StyledPressable>
-                            </View>
-                        ),
                     }}
                 />
                 <Tabs.Screen

@@ -77,7 +77,6 @@ export function DeletePlayer({ playerId, disabled = false, classes = "", name = 
                             >
                                 <Text className="text-gray-800 text-center font-poppins-semibold">Cancel</Text>
                             </StyledPressable>
-
                             <StyledPressable
                                 className={`flex-1 bg-red-500 py-3 rounded-lg active:opacity-70 ${
                                     isLoading ? "opacity-50" : ""
