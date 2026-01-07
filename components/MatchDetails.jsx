@@ -141,7 +141,7 @@ export function MatchDetails({ matchId }) {
                     <EditIcon color="#1E40AF" />
                 </StyledPressable>
             </View>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {/* Results */}
                 <View
                     className={`flex-1 items-center justify-center space-y-3 bg-slate-200 rounded-lg shadow-sm mb-4 py-6 ${

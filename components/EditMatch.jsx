@@ -275,7 +275,11 @@ export function EditMatch({ matchId }) {
                 </StyledPressable>
             </View>
             {/* Scrollable form */}
-            <ScrollView className="flex-1 bg-surface rounded-lg shadow-sm" contentContainerStyle={{ padding: 16 }}>
+            <ScrollView
+                className="flex-1 bg-surface rounded-lg shadow-sm"
+                contentContainerStyle={{ padding: 16 }}
+                showsVerticalScrollIndicator={false}
+            >
                 {/* Match information */}
                 <Text className="text-textSecondary text-sm mb-2 font-poppins">Match information:</Text>
                 <FormDate

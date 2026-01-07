@@ -17,6 +17,7 @@ export function FormDate({
     required = false,
     maxDate = new Date(),
     updating = false,
+    deletable = false,
     ...props
 }) {
     const [showPicker, setShowPicker] = useState(false);
@@ -66,26 +67,41 @@ export function FormDate({
                 {required && <Text className="text-red-600 ml-1 font-poppins">*</Text>}
             </View>
             {/* Date Button */}
-            <StyledPressable
-                onPress={() => {
-                    setShowPicker(true);
-                    setIsFocused(true);
-                }}
-                className={`bg-slate-100 rounded-xl border py-3 px-4 flex-row space-x-4 justify-start items-center active:opacity-70 ${
+            <View
+                className={`bg-slate-100 rounded-xl border py-3 px-4 flex-row space-x-4 justify-start items-center ${
                     error ? "border-red-600 bg-red-50/30" : isFocused ? "border-primary" : "border-border"
                 } ${updating ? "opacity-50" : ""}`}
-                disabled={updating}
             >
-                <CalendarIcon color={error ? "#EF4444" : isFocused ? "#1E40AF" : "#6B7280"} />
-                <View className="w-px h-full bg-gray-400" />
-                <Text
-                    className={`text-base font-poppins ${selectedDate ? "text-textPrimary" : "text-gray-400"} ${
-                        textClass ? textClass : ""
-                    }`}
+                <StyledPressable
+                    onPress={() => {
+                        setShowPicker(true);
+                        setIsFocused(true);
+                    }}
+                    className="flex-row items-center space-x-4 flex-1 active:opacity-70"
+                    disabled={updating}
                 >
-                    {selectedDate ? formatDate(selectedDate) : placeholder}
-                </Text>
-            </StyledPressable>
+                    <CalendarIcon color={error ? "#EF4444" : isFocused ? "#1E40AF" : "#6B7280"} />
+                    <View className="w-px h-full bg-gray-400" />
+                    <Text
+                        className={`text-base font-poppins ${selectedDate ? "text-textPrimary" : "text-gray-400"} ${
+                            textClass ? textClass : ""
+                        }`}
+                    >
+                        {selectedDate ? formatDate(selectedDate) : placeholder}
+                    </Text>
+                </StyledPressable>
+                {selectedDate && !updating && deletable && (
+                    <StyledPressable
+                        onPress={() => {
+                            onChange(null);
+                            setIsFocused(false);
+                        }}
+                        className="ml-2 active:opacity-70"
+                    >
+                        <Text className="text-gray-500 text-xl">×</Text>
+                    </StyledPressable>
+                )}
+            </View>
             {/* Date Picker */}
             {showPicker && (
                 <>

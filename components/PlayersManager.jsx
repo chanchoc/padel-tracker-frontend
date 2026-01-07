@@ -155,6 +155,7 @@ export function PlayersManager() {
                         keyExtractor={(item) => item._id.toString()}
                         renderItem={({ item, index }) => <PlayerCard player={item} />}
                         className="flex-1 w-full"
+                        showsVerticalScrollIndicator={false}
                     />
                 )}
             </View>
