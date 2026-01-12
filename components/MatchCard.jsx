@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 import { useEffect, useRef } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import { styled } from "nativewind";
-import { LocationIcon, OpponentIcon, TeammateIcon } from "./Icons.jsx";
+import { LocationIcon, OpponentIcon, TeammateIcon, WinIcon, LoseIcon, UnknownIcon } from "./Icons.jsx";
 import React from "react";
 
 const StyledPressable = styled(Pressable);
@@ -29,16 +29,22 @@ export function AnimatedMatchCard({ match, index }) {
 
 export function MatchCard({ match }) {
     const resultColors = {
-        Win: "bg-emerald-100/70 border-emerald-500",
-        Lose: "bg-red-100/70 border-red-500",
-        Draw: "bg-blue-100/70 border-blue-500",
-        DNF: "bg-slate-100/70 border-slate-400",
+        Win: "border-l-emerald-500",
+        Lose: "border-l-red-500",
+        Draw: "border-l-blue-500",
+        DNF: "border-l-slate-400",
     };
     const resultTextColors = {
         Win: "text-emerald-700",
         Lose: "text-red-700",
         Draw: "text-blue-700",
         DNF: "text-slate-700",
+    };
+    const resultIcons = {
+        Win: <WinIcon color="#059669" />,
+        Lose: <LoseIcon color="#b91c1c" />,
+        Draw: <UnknownIcon color="#1e40af" />,
+        DNF: <UnknownIcon color="#78716c" />,
     };
 
     const opponents = match?.opponents ? match.opponents.join(" - ") : null;
@@ -47,33 +53,36 @@ export function MatchCard({ match }) {
     return (
         <Link href={`match-details/${match._id}`} asChild>
             <StyledPressable
-                className={`active:opacity-60 active:scale-95 px-6 py-3 rounded-xl shadow-md shadow-black/10 border border-l-4 ${
+                className={`active:opacity-60 active:scale-95 px-6 py-3 rounded-xl shadow-md shadow-black/10 border border-l-4 bg-indigo-50 border-indigo-200 ${
                     resultColors[match?.result || "DNF"] || "bg-white border-gray-200"
                 }`}
             >
                 {/* Header */}
                 <View className="flex-row justify-between items-center">
-                    <Text
-                        className={`font-poppins-bold text-lg ${resultTextColors[match?.result || "DNF"]} ${
-                            match?.score ? "" : "font-poppins-italic"
-                        }`}
-                    >
-                        {match?.score || "No score"}
-                    </Text>
-                    <Text
-                        className={`font-poppins-semibold text-xs tracking-wide ${
-                            resultTextColors[match?.result || "DNF"]
-                        }`}
-                    >
-                        {new Date(match.date).toLocaleDateString("en-US", {
-                            day: "numeric",
-                            weekday: "short",
-                            month: "long",
-                            year: "numeric",
-                        })}
-                    </Text>
+                    <View className="flex-col justify-center items-start">
+                        <Text
+                            className={`font-poppins-bold text-lg ${resultTextColors[match?.result || "DNF"]} ${
+                                match?.score ? "" : "font-poppins-italic"
+                            }`}
+                        >
+                            {match?.score || "No score"}
+                        </Text>
+                        <Text
+                            className={`font-poppins-semibold text-xs tracking-wide ${
+                                resultTextColors[match?.result || "DNF"]
+                            }`}
+                        >
+                            {new Date(match.date).toLocaleDateString("en-US", {
+                                day: "numeric",
+                                weekday: "short",
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </Text>
+                    </View>
+                    {resultIcons[match?.result || "DNF"]}
                 </View>
-                <View className="w-full h-px bg-gray-400 my-3" />
+                <View className="w-full h-px bg-indigo-200 my-3" />
                 {/* Players */}
                 {!opponents && !teammates ? (
                     <Text className="text-gray-500 text-lg font-poppins-italic mb-3">No players</Text>
@@ -87,7 +96,7 @@ export function MatchCard({ match }) {
                                 match?.teammates?.map((player) => (
                                     <View
                                         key={player._id}
-                                        className="bg-green-200 border border-green-400 rounded-full px-3 py-1 flex-row items-center"
+                                        className="bg-green-100 border-green-200 rounded-full px-3 py-1 flex-row items-center"
                                     >
                                         <Text className="text-green-700 text-sm font-poppins-semibold">
                                             {player.name}
@@ -104,7 +113,7 @@ export function MatchCard({ match }) {
                                 match?.opponents?.map((player) => (
                                     <View
                                         key={player._id}
-                                        className="bg-red-200 border border-red-400 rounded-full px-3 py-1 flex-row items-center"
+                                        className="bg-red-100 border-red-200 rounded-full px-3 py-1 flex-row items-center"
                                     >
                                         <Text className="text-red-700 text-sm font-poppins-semibold">
                                             {player.name}

@@ -180,3 +180,30 @@ export const PlusIcon = (props) => {
         </IconWrapper>
     );
 };
+
+export const WinIcon = (props) => {
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="trophy" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
+};
+
+export const LoseIcon = (props) => {
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="ban" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
+};
+
+export const UnknownIcon = (props) => {
+    const { size = 24, ...rest } = props;
+    return (
+        <IconWrapper size={size}>
+            <FontAwesome name="question" size={size} color="black" {...rest} />
+        </IconWrapper>
+    );
+};
