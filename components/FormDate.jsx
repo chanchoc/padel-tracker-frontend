@@ -81,7 +81,7 @@ export function FormDate({
                     disabled={updating}
                 >
                     <CalendarIcon color={error ? "#EF4444" : isFocused ? "#1E40AF" : "#6B7280"} />
-                    <View className="w-px h-full bg-gray-400" />
+                    <View className="w-px self-stretch bg-gray-400" />
                     <Text
                         className={`text-base font-poppins ${selectedDate ? "text-textPrimary" : "text-gray-400"} ${
                             textClass ? textClass : ""
