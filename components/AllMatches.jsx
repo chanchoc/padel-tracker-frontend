@@ -92,13 +92,16 @@ export function AllMatches() {
                 <View className="flex-row mr-4">
                     {/* Botón filtros */}
                     <Pressable
-                        disabled={loading || (matches.length === 0 && !hasActiveFilters(appliedFilters))}
+                        disabled={loading || error || (matches.length === 0 && !hasActiveFilters(appliedFilters))}
                         onPress={() => {
                             filtersForm.reset(appliedFilters);
                             setShowFilters(true);
                         }}
                         style={{
-                            opacity: loading || (matches.length === 0 && !hasActiveFilters(appliedFilters)) ? 0.5 : 1,
+                            opacity:
+                                loading || error || (matches.length === 0 && !hasActiveFilters(appliedFilters))
+                                    ? 0.5
+                                    : 1,
                             backgroundColor: "#FFFFFF",
                             borderRadius: 20,
                             width: 40,
@@ -128,7 +131,7 @@ export function AllMatches() {
                 </View>
             ),
         });
-    }, [navigation, loading, appliedFilters, filtersForm, matches.length]);
+    }, [navigation, loading, error, appliedFilters, filtersForm, matches.length]);
 
     const onRefresh = () => {
         setRefreshing(true);
@@ -212,7 +215,12 @@ export function AllMatches() {
     }
 
     if (error) {
-        return <ErrorMessage message={"Error loading your matches"} classes={"px-6 py-3"} />;
+        return (
+            <ErrorMessage
+                message={"Error loading your matches"}
+                classes={"px-6 py-6 bg-background flex-1 justify-start"}
+            />
+        );
     }
 
     return (

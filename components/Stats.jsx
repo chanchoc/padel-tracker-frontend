@@ -116,13 +116,13 @@ export function Stats() {
             headerRight: () => (
                 <View className="flex-row mr-4">
                     <Pressable
-                        disabled={loading}
+                        disabled={loading || error}
                         onPress={() => {
                             filtersForm.reset(appliedFilters);
                             setShowFilters(true);
                         }}
                         style={{
-                            opacity: loading ? 0.5 : 1,
+                            opacity: loading || error ? 0.5 : 1,
                             backgroundColor: "#FFFFFF",
                             borderRadius: 20,
                             width: 40,
@@ -138,7 +138,7 @@ export function Stats() {
                 </View>
             ),
         });
-    }, [navigation, loading, appliedFilters, filtersForm]);
+    }, [navigation, loading, error, appliedFilters, filtersForm]);
 
     useFocusEffect(loadStats);
 
@@ -171,7 +171,12 @@ export function Stats() {
     }
 
     if (error) {
-        return <ErrorMessage message={"Error loading your stats"} classes={"my-3 px-6 py-3"} />;
+        return (
+            <ErrorMessage
+                message={"Error loading your stats"}
+                classes={"px-6 py-6 bg-background flex-1 justify-start"}
+            />
+        );
     }
 
     return (
