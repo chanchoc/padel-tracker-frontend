@@ -24,7 +24,6 @@ export default {
                 backgroundColor: "#ffffff",
             },
             package: "com.chanchoc.frontend",
-            targetSdkVersion: 35,
         },
         web: {
             bundler: "metro",
@@ -48,6 +47,16 @@ export default {
                         "./assets/fonts/Poppins-BoldItalic.ttf",
                         "./assets/fonts/FontAwesome.ttf",
                     ],
+                },
+            ],
+            [
+                "expo-build-properties",
+                {
+                    android: {
+                        compileSdkVersion: 35,
+                        targetSdkVersion: 35,
+                        buildToolsVersion: "35.0.0",
+                    },
                 },
             ],
         ],
