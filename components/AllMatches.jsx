@@ -220,7 +220,7 @@ export function AllMatches() {
             {matches.length === 0 ? (
                 <>
                     {hasActiveFilters(appliedFilters) && (
-                        <AppliedFiltersDisplay appliedFilters={appliedFilters} labelClass="my-5" />
+                        <AppliedFiltersDisplay appliedFilters={appliedFilters} labelClass="mt-5" />
                     )}
                     <View className="flex-1 items-center justify-center">
                         <View className="items-center">
