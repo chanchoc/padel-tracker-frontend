@@ -138,8 +138,12 @@ export const apiMethods = {
             body: JSON.stringify(data),
         });
     },
-    delete: (url) => {
-        return authenticatedFetch(url, { method: "DELETE" });
+    delete: (url, body) => {
+        const options = { method: "DELETE" };
+        if (body) {
+            options.body = JSON.stringify(body);
+        }
+        return authenticatedFetch(url, options);
     },
 };
 

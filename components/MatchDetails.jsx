@@ -148,7 +148,9 @@ export function MatchDetails({ matchId }) {
                         resultColors[match?.result || "Win"]
                     }`}
                 >
-                    <Text className={`text-3xl font-poppins-bold ${resultTextColors[match?.result || "Win"]}`}>
+                    <Text
+                        className={`text-3xl font-poppins-bold text-center ${resultTextColors[match?.result || "Win"]}`}
+                    >
                         {match?.score || match?.result}
                     </Text>
                     <Text

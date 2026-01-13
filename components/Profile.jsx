@@ -3,6 +3,7 @@ import { UserIcon } from "./Icons.jsx";
 import { useEffect, useRef, useState } from "react";
 import { getUser } from "../services/users.js";
 import { ErrorMessage } from "./ErrorMessage.jsx";
+import { DeleteAccount } from "./DeleteAccount.jsx";
 
 export function Profile() {
     const [user, setUser] = useState(null);
@@ -76,6 +77,7 @@ export function Profile() {
                 <Text className="text-textPrimary text-2xl font-poppins-bold mt-3 capitalize w-full text-center">
                     {user.name || "User Name"}
                 </Text>
+                <DeleteAccount />
             </View>
             <View className="flex-1">
                 <View className="flex-1 bg-surface rounded-lg p-4 mb-4 shadow-sm">

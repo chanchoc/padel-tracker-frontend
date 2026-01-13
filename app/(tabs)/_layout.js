@@ -1,11 +1,8 @@
-import { Redirect, router, Tabs } from "expo-router";
-import { styled } from "nativewind";
-import { ActivityIndicator, Pressable, Text, View } from "react-native";
-import { PlusIcon, StatsIcon, TennisIcon, UserIcon } from "../../components/Icons.jsx";
+import { Redirect, Tabs } from "expo-router";
+import { ActivityIndicator, Text, View } from "react-native";
+import { StatsIcon, TennisIcon, UserIcon } from "../../components/Icons.jsx";
 import { useAuth } from "../../hooks/useAuth.js";
 import { AuthLoading } from "../../components/AuthLoading.jsx";
-
-const StyledPressable = styled(Pressable);
 
 export default function TabsLayout() {
     const { isAuthenticated, isLoading } = useAuth();
@@ -72,26 +69,6 @@ export default function TabsLayout() {
                     name="index"
                     options={{
                         headerTitle: "My Matches",
-                        headerRight: () => (
-                            <View className="flex-row space-x-6 mr-4">
-                                <StyledPressable
-                                    className="bg-primary rounded-full h-10 w-10 items-center justify-center active:bg-primary/80"
-                                    onPress={() => router.push("/create-match")}
-                                    accessibilityLabel="Add new match"
-                                    accessibilityHint="Opens form to create a new match"
-                                >
-                                    <PlusIcon size={24} color="#FFFFFF" />
-                                </StyledPressable>
-                                <StyledPressable
-                                    className="bg-surface rounded-full h-10 w-10 items-center justify-center active:bg-gray-300"
-                                    onPress={() => router.push("/players")}
-                                    accessibilityLabel="Manage players"
-                                    accessibilityHint="Opens player management"
-                                >
-                                    <UserIcon size={24} color="#0F172A" />
-                                </StyledPressable>
-                            </View>
-                        ),
                         tabBarIcon: ({ color }) => <TennisIcon size={24} color={color} />,
                     }}
                 />

@@ -12,12 +12,16 @@ export function AnimatedMatchCard({ match, index }) {
     const opacity = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.timing(opacity, {
-            toValue: 1,
-            duration: 300,
-            delay: index * 200,
-            useNativeDriver: true,
-        }).start();
+        if (index < 10) {
+            Animated.timing(opacity, {
+                toValue: 1,
+                duration: 300,
+                delay: index * 200,
+                useNativeDriver: true,
+            }).start();
+        } else {
+            opacity.setValue(1);
+        }
     }, [opacity, index]);
 
     return (

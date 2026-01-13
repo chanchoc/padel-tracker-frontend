@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, View } from "react-native";
+import { Pressable, RefreshControl, ScrollView, View } from "react-native";
 import { StatsSummary } from "./StatsSummary.jsx";
 import { HeadToHead } from "./HeadToHead.jsx";
 import { Timeline } from "./Timeline.jsx";
@@ -11,7 +11,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { StatsSkeleton } from "./StatsSkeleton.jsx";
 import { useNavigation } from "expo-router";
 import { FiltersIcon } from "./Icons.jsx";
-import { StatsFilters } from "./StatsFilters.jsx";
+import { MatchFilters } from "./MatchFilters.jsx";
 import { useForm } from "react-hook-form";
 import { AppliedFiltersDisplay } from "./AppliedStatsDisplay.jsx";
 
@@ -69,6 +69,7 @@ export function Stats() {
     const [players, setPlayers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
     const [appliedFilters, setAppliedFilters] = useState(EMPTY_FILTERS);
     const filtersForm = useForm({ defaultValues: appliedFilters });
@@ -76,24 +77,33 @@ export function Stats() {
     const { refreshTrigger } = useMatches();
     const lastRefreshTrigger = useRef(0);
 
-    const fetchStats = useCallback((filters) => {
-        setLoading(true);
-        setError(null);
-        const apiFilters = buildApiFilters(filters);
-        Promise.all([
-            getSummaryStats(apiFilters).then((data) => setStats(data.data)),
-            getHeadToHeadStats(apiFilters).then((data) => setHeadToHead(data.data)),
-            getTimeline(apiFilters).then((data) => setTimeline(data.data)),
-            getPlayers().then((data) => setPlayers(orderPlayersByName(data.data))),
-        ])
-            .catch((error) => {
-                console.error("Error loading stats:", error);
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+    const onRefresh = () => {
+        setRefreshing(true);
+        fetchStats(appliedFilters);
+    };
+
+    const fetchStats = useCallback(
+        (filters) => {
+            if (!refreshing) setLoading(true);
+            setError(null);
+            const apiFilters = buildApiFilters(filters);
+            Promise.all([
+                getSummaryStats(apiFilters).then((data) => setStats(data.data)),
+                getHeadToHeadStats(apiFilters).then((data) => setHeadToHead(data.data)),
+                getTimeline(apiFilters).then((data) => setTimeline(data.data)),
+                getPlayers().then((data) => setPlayers(orderPlayersByName(data.data))),
+            ])
+                .catch((error) => {
+                    console.error("Error loading stats:", error);
+                    setError(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                    setRefreshing(false);
+                });
+        },
+        [refreshing]
+    );
 
     const loadStats = useCallback(() => {
         if (lastRefreshTrigger.current === refreshTrigger) return;
@@ -170,6 +180,14 @@ export function Stats() {
                 className="flex-1 bg-background"
                 contentContainerStyle={{ flexGrow: 1 }}
                 showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                        colors={["#1E40AF"]}
+                        tintColor="#1E40AF"
+                    />
+                }
             >
                 <View className="flex-1 items-center justify-start p-6">
                     {/* Applied Filters Display */}
@@ -182,7 +200,7 @@ export function Stats() {
                     <HeadToHead data={headToHead} />
                 </View>
             </ScrollView>
-            <StatsFilters
+            <MatchFilters
                 visible={showFilters}
                 onClose={() => {
                     filtersForm.reset(appliedFilters);

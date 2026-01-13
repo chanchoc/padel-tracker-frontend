@@ -10,3 +10,14 @@ export const getUser = async () => {
         throw error;
     }
 };
+
+export const deleteAccount = async (password) => {
+    try {
+        const url = "/users/profile";
+        const response = await apiMethods.delete(url, { password });
+        return response;
+    } catch (error) {
+        console.error("Error deleting account:", error);
+        throw error;
+    }
+};

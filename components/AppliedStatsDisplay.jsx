@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export function AppliedFiltersDisplay({ appliedFilters }) {
+export function AppliedFiltersDisplay({ appliedFilters, labelClass = "" }) {
     const hasActiveFilters = () => {
         return (
-            appliedFilters.fromDate ||
+            appliedFilters.startDate ||
             appliedFilters.endDate ||
             appliedFilters.level ||
             appliedFilters.side ||
@@ -51,7 +51,7 @@ export function AppliedFiltersDisplay({ appliedFilters }) {
     const chips = getActiveFilterChips();
 
     return (
-        <View className="items-center justify-center bg-blue-50 rounded-lg p-4 mb-4 gap-1 w-full">
+        <View className={`items-center justify-center bg-blue-50 rounded-lg p-4 mb-4 gap-1 w-full ${labelClass}`}>
             <Text className="text-base font-poppins-bold text-textSecondary">Active Filters: {chips.length}</Text>
             <View className="flex-row flex-wrap gap-2 justify-center">
                 {chips.map((chip) => (

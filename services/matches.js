@@ -1,9 +1,9 @@
 import { apiMethods } from "./httpClient.js";
 
-export const getMatches = async (filters = {}) => {
+export const getMatches = async (params = {}) => {
     try {
         const url = "/matches";
-        const response = await apiMethods.get(url, filters);
+        const response = await apiMethods.get(url, params);
         return response;
     } catch (error) {
         console.error("Error fetching matches:", error);

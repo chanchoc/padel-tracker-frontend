@@ -13,7 +13,7 @@ const getEndOfToday = () => {
     return today;
 };
 
-export function StatsFilters({ visible, onClose, control, onApply, onClear, players }) {
+export function MatchFilters({ visible, onClose, control, onApply, onClear, players }) {
     return (
         <Modal visible={visible} transparent={true} animationType="fade" onRequestClose={onClose}>
             <View className="flex-1 bg-black/50 justify-center items-center px-6">
