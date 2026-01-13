@@ -24,6 +24,7 @@ export default {
                 backgroundColor: "#ffffff",
             },
             package: "com.chanchoc.frontend",
+            targetSdkVersion: 35,
         },
         web: {
             bundler: "metro",
