@@ -1,6 +1,6 @@
 /* global setTimeout */
 import { styled } from "nativewind";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
     BackArrowIcon,
@@ -242,141 +242,148 @@ export function CreateMatch() {
                 </StyledPressable>
             </View>
             {/* Scrollable form */}
-            <ScrollView
-                className="flex-1 bg-surface rounded-lg shadow-sm"
-                contentContainerStyle={{ padding: 16 }}
-                showsVerticalScrollIndicator={false}
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                className="flex-1"
+                keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
             >
-                {/* Match information */}
-                <Text className="text-textSecondary text-sm mb-2 font-poppins">Match information:</Text>
-                <FormDate
-                    control={control}
-                    name="date"
-                    label="Date"
-                    placeholder="Select date"
-                    required={false}
-                    maximumDate={getEndOfToday()}
-                    updating={updating}
-                />
-                <FormInput
-                    control={control}
-                    name="location"
-                    label="Location"
-                    placeholder="Location"
-                    keyboardType="default"
-                    required={true}
-                    maxLength={100}
-                    icon={<LocationIcon size={24} />}
-                    updating={updating}
-                />
-                <FormDropdown
-                    control={control}
-                    name="level"
-                    label="Category"
-                    placeholder="Select Category"
-                    options={Array.from({ length: 9 }, (_, i) => ({
-                        _id: (i + 1).toString(),
-                        name: (i + 1).toString(),
-                    }))}
-                    displayKey="name"
-                    valueKey="_id"
-                    icon={<LevelIcon />}
-                    required={true}
-                    updating={updating}
-                />
-                <FormDropdown
-                    control={control}
-                    name="side"
-                    label="Side"
-                    placeholder="Select side"
-                    options={[
-                        { _id: "Left", name: "Left" },
-                        { _id: "Right", name: "Right" },
-                    ]}
-                    displayKey="name"
-                    valueKey="_id"
-                    icon={<SideIcon />}
-                    required={true}
-                    updating={updating}
-                />
-                {/* Players */}
-                <View className="flex-1 flex-row items-center justify-between mb-2 mt-4">
-                    <Text className="text-textSecondary text-sm font-poppins">Players:</Text>
-                    <NewPlayer
-                        players={players}
-                        onCreated={handlePlayerCreated}
-                        fastCreate={true}
+                <ScrollView
+                    className="flex-1 bg-surface rounded-lg shadow-sm"
+                    contentContainerStyle={{ padding: 16, paddingBottom: 16 }}
+                    showsVerticalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    {/* Match information */}
+                    <Text className="text-textSecondary text-sm mb-2 font-poppins">Match information:</Text>
+                    <FormDate
+                        control={control}
+                        name="date"
+                        label="Date"
+                        placeholder="Select date"
+                        required={false}
+                        maximumDate={getEndOfToday()}
                         updating={updating}
                     />
-                </View>
-                <FormDropdown
-                    control={control}
-                    name="teammates"
-                    label="Teammates"
-                    placeholder="Select teammates"
-                    options={players}
-                    displayKey="name"
-                    valueKey="_id"
-                    icon={<TeammateIcon />}
-                    updating={updating}
-                    multiple={true}
-                />
-                <FormDropdown
-                    control={control}
-                    name="opponents"
-                    label="Opponents"
-                    placeholder="Select opponents"
-                    options={players}
-                    displayKey="name"
-                    valueKey="_id"
-                    icon={<OpponentIcon />}
-                    updating={updating}
-                    multiple={true}
-                />
-                {/* Result */}
-                <Text className="text-textSecondary text-sm mb-2 mt-4 font-poppins">Result:</Text>
-                <FormDropdown
-                    control={control}
-                    name="result"
-                    label="Result"
-                    placeholder="Select result"
-                    options={[
-                        { _id: "Win", name: "Win" },
-                        { _id: "Lose", name: "Lose" },
-                        { _id: "Draw", name: "Draw" },
-                        { _id: "DNF", name: "Did not finished" },
-                    ]}
-                    displayKey="name"
-                    valueKey="_id"
-                    icon={<ResultIcon />}
-                    required={true}
-                    updating={updating}
-                />
-                <FormInput
-                    control={control}
-                    name="score"
-                    label="Score"
-                    placeholder="Score"
-                    keyboardType="default"
-                    maxLength={100}
-                    icon={<ScoreIcon size={24} />}
-                    updating={updating}
-                />
-                {/* Comments */}
-                <Text className="text-textSecondary text-sm mb-2 mt-4 font-poppins">Comments:</Text>
-                <FormInput
-                    control={control}
-                    name="comment"
-                    label="Comment"
-                    placeholder="Comment"
-                    keyboardType="default"
-                    required={false}
-                    maxLength={500}
-                    multiline={true}
-                    icon={<CommentIcon />}
-                    updating={updating}
-                />
-            </ScrollView>
+                    <FormInput
+                        control={control}
+                        name="location"
+                        label="Location"
+                        placeholder="Location"
+                        keyboardType="default"
+                        required={true}
+                        maxLength={100}
+                        icon={<LocationIcon size={24} />}
+                        updating={updating}
+                    />
+                    <FormDropdown
+                        control={control}
+                        name="level"
+                        label="Category"
+                        placeholder="Select Category"
+                        options={Array.from({ length: 9 }, (_, i) => ({
+                            _id: (i + 1).toString(),
+                            name: (i + 1).toString(),
+                        }))}
+                        displayKey="name"
+                        valueKey="_id"
+                        icon={<LevelIcon />}
+                        required={true}
+                        updating={updating}
+                    />
+                    <FormDropdown
+                        control={control}
+                        name="side"
+                        label="Side"
+                        placeholder="Select side"
+                        options={[
+                            { _id: "Left", name: "Left" },
+                            { _id: "Right", name: "Right" },
+                        ]}
+                        displayKey="name"
+                        valueKey="_id"
+                        icon={<SideIcon />}
+                        required={true}
+                        updating={updating}
+                    />
+                    {/* Players */}
+                    <View className="flex-1 flex-row items-center justify-between mb-2 mt-4">
+                        <Text className="text-textSecondary text-sm font-poppins">Players:</Text>
+                        <NewPlayer
+                            players={players}
+                            onCreated={handlePlayerCreated}
+                            fastCreate={true}
+                            updating={updating}
+                        />
+                    </View>
+                    <FormDropdown
+                        control={control}
+                        name="teammates"
+                        label="Teammates"
+                        placeholder="Select teammates"
+                        options={players}
+                        displayKey="name"
+                        valueKey="_id"
+                        icon={<TeammateIcon />}
+                        updating={updating}
+                        multiple={true}
+                    />
+                    <FormDropdown
+                        control={control}
+                        name="opponents"
+                        label="Opponents"
+                        placeholder="Select opponents"
+                        options={players}
+                        displayKey="name"
+                        valueKey="_id"
+                        icon={<OpponentIcon />}
+                        updating={updating}
+                        multiple={true}
+                    />
+                    {/* Result */}
+                    <Text className="text-textSecondary text-sm mb-2 mt-4 font-poppins">Result:</Text>
+                    <FormDropdown
+                        control={control}
+                        name="result"
+                        label="Result"
+                        placeholder="Select result"
+                        options={[
+                            { _id: "Win", name: "Win" },
+                            { _id: "Lose", name: "Lose" },
+                            { _id: "Draw", name: "Draw" },
+                            { _id: "DNF", name: "Did not finished" },
+                        ]}
+                        displayKey="name"
+                        valueKey="_id"
+                        icon={<ResultIcon />}
+                        required={true}
+                        updating={updating}
+                    />
+                    <FormInput
+                        control={control}
+                        name="score"
+                        label="Score"
+                        placeholder="Score"
+                        keyboardType="default"
+                        maxLength={100}
+                        icon={<ScoreIcon size={24} />}
+                        updating={updating}
+                    />
+                    {/* Comments */}
+                    <Text className="text-textSecondary text-sm mb-2 mt-4 font-poppins">Comments:</Text>
+                    <FormInput
+                        control={control}
+                        name="comment"
+                        label="Comment"
+                        placeholder="Comment"
+                        keyboardType="default"
+                        required={false}
+                        maxLength={500}
+                        multiline={true}
+                        icon={<CommentIcon />}
+                        updating={updating}
+                    />
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
