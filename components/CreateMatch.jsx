@@ -350,7 +350,7 @@ export function CreateMatch() {
                             { _id: "Win", name: "Win" },
                             { _id: "Lose", name: "Lose" },
                             { _id: "Draw", name: "Draw" },
-                            { _id: "DNF", name: "Did not finished" },
+                            { _id: "DNF", name: "Did not finish" },
                         ]}
                         displayKey="name"
                         valueKey="_id"

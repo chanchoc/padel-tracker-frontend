@@ -4,7 +4,7 @@ export default {
     expo: {
         name: "Padel Tracker",
         slug: "frontend",
-        version: "1.0.0",
+        version: "1.0.2",
         orientation: "portrait",
         icon: "./assets/images/icon.png",
         scheme: "padeltracker",
@@ -24,6 +24,7 @@ export default {
                 backgroundColor: "#ffffff",
             },
             package: "com.chanchoc.frontend",
+            softwareKeyboardLayoutMode: "pan",
         },
         web: {
             bundler: "metro",
@@ -56,6 +57,9 @@ export default {
                         compileSdkVersion: 35,
                         targetSdkVersion: 35,
                         buildToolsVersion: "35.0.0",
+                        manifestQueries: {
+                            package: ["com.chanchoc.frontend"],
+                        },
                     },
                 },
             ],

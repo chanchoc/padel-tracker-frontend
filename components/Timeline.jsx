@@ -57,12 +57,12 @@ export function Timeline({ data, maxWeeks = 10 }) {
                             {/* Rango de semana */}
                             <View className="flex-row justify-between items-center mb-2">
                                 <Text className="text-sm font-poppins-semibold text-textPrimary">
-                                    {mondayDate.toLocaleDateString("es", {
+                                    {mondayDate.toLocaleDateString("en-US", {
                                         month: "short",
                                         day: "numeric",
                                     })}{" "}
                                     -{" "}
-                                    {sundayDate.toLocaleDateString("es", {
+                                    {sundayDate.toLocaleDateString("en-US", {
                                         month: "short",
                                         day: "numeric",
                                     })}
