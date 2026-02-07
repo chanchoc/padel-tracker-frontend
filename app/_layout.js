@@ -9,6 +9,7 @@ import { AuthLoading } from "../components/AuthLoading.jsx";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect } from "react";
 import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Keep splash visible while fonts load
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -39,24 +40,26 @@ export default function RootLayout() {
     }, [fontsLoaded]);
 
     return (
-        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-            {!fontsLoaded && !fontError ? (
-                <AuthLoading />
-            ) : (
-                <AuthProvider>
-                    <MatchesProvider>
-                        <PlayersProvider>
-                            <StatusBar style={isLightScreen ? "dark" : "light"} />
-                            <Stack
-                                screenOptions={{
-                                    headerShown: false,
-                                }}
-                            />
-                            <Toast />
-                        </PlayersProvider>
-                    </MatchesProvider>
-                </AuthProvider>
-            )}
-        </View>
+        <SafeAreaProvider>
+            <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+                {!fontsLoaded && !fontError ? (
+                    <AuthLoading />
+                ) : (
+                    <AuthProvider>
+                        <MatchesProvider>
+                            <PlayersProvider>
+                                <StatusBar style={isLightScreen ? "dark" : "light"} />
+                                <Stack
+                                    screenOptions={{
+                                        headerShown: false,
+                                    }}
+                                />
+                                <Toast />
+                            </PlayersProvider>
+                        </MatchesProvider>
+                    </AuthProvider>
+                )}
+            </View>
+        </SafeAreaProvider>
     );
 }

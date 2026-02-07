@@ -3,9 +3,11 @@ import { ActivityIndicator, Text, View } from "react-native";
 import { StatsIcon, TennisIcon, UserIcon } from "../../components/Icons.jsx";
 import { useAuth } from "../../hooks/useAuth.js";
 import { AuthLoading } from "../../components/AuthLoading.jsx";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
     const { isAuthenticated, isLoading } = useAuth();
+    const insets = useSafeAreaInsets();
 
     if (isLoading) {
         return <AuthLoading />;
@@ -23,8 +25,8 @@ export default function TabsLayout() {
                         backgroundColor: "#0F172A",
                         borderTopColor: "#1E293B",
                         borderTopWidth: 1,
-                        height: 65,
-                        paddingBottom: 12,
+                        height: 65 + insets.bottom,
+                        paddingBottom: insets.bottom + 12,
                         paddingTop: 12,
                         shadowColor: "#000",
                         shadowOffset: { width: 0, height: -3 },
