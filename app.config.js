@@ -60,6 +60,8 @@ export default {
                         manifestQueries: {
                             package: ["com.chanchoc.frontend"],
                         },
+                        enableProguardInReleaseBuilds: true,
+                        useLegacyPackaging: false,
                     },
                 },
             ],
