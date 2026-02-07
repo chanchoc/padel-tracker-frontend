@@ -57,11 +57,13 @@ export default {
                         compileSdkVersion: 35,
                         targetSdkVersion: 35,
                         buildToolsVersion: "35.0.0",
+                        minSdkVersion: 24,
                         manifestQueries: {
                             package: ["com.chanchoc.frontend"],
                         },
                         enableProguardInReleaseBuilds: true,
                         useLegacyPackaging: false,
+                        ndkVersion: "27.0.12077973",
                     },
                 },
             ],
